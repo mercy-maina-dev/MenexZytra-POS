@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    // "moduleResolution": "node10",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,// Ensure consistent casing in file names 
+    /* Type Checking */
+    "strict": true,
+    "skipLibCheck": true 
+  },
+  "include": [
+    "src/**/*"   // Include all TypeScript files in the src directory
+  ],
+  "exclude": [// Exclude node_modules and test files
+    "node_modules",// Exclude node_modules
+    "**/*.spec.ts"
+  ],
+}
+
+
+
