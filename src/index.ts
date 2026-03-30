@@ -2,33 +2,28 @@ import express from 'express';
 
 import getPool from './db/config'; 
 import { get } from 'node:http'  
+import dotenv from 'dotenv';
+import getAllUsersRoutes from './router/Users.routes';
+
 const app = express();// Create an Express application
+app.use(express.json());// Middleware to parse JSON request bodies
+dotenv.config();// Load environment variables from a .env file  
 
 app.get('/', (req, res) => {
   res.send('Hello, Express server is running!');// Send a response to the client
 });
 
-const PORT = 3000;// Define the port number for the server to listen on
+const PORT = process.env.PORT || 3000;// Define the port number for the server to listen on
 
 app.listen(PORT, () => {// Start the server and listen on the specified port
   console.log(`Server is running on port :http://localhost:${PORT}`);// Log a message when the server starts
 });
 
-//fetch users with minimal error hndling to test the database connection
-app.get('/Users', (req, res) => {
-  getPool()
-    .then(pool => {
-      return pool.request().query("SELECT * FROM Users");
-    })
-    .then(result => {
-      console.log("results", result);
-      res.json(result.recordset);
-    })
-    .catch(err => {
-      console.error("Error fetching users:", err);
-      res.status(500).send("Server error");
-    });
-});
+
+
+//register routes
+getAllUsersRoutes(app);// Register the routes for handling user-related operations
+
      
 
 
